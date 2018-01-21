@@ -75,6 +75,7 @@ before_script:
 script:
 - bin/console server:start
 # - make serve # would need a Makefile !
+- sleep .01
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
 - w3m http://localhost:8000/ | cat # no webpage defined right now! (try also elinks)
 
