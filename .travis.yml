@@ -39,7 +39,7 @@ install:
 # - composer create-project symfony/skeleton my-project $SYMFONY_VERSION
 #^ Does not work yet for Symfony dev versions!
 #^ in Symfony 4 there is a symfony command instead! (is it an urban legend?)
-- composer create-project --no-install symfony/skeleton my-project $SKELETON_VERSION
+- composer create-project --no-install symfony/website-skeleton my-project $SKELETON_VERSION
 - cd my-project
 - if [ "dev-master@dev" = $SKELETON_VERSION ]; then composer remove --no-update symfony/lts; fi
 # - composer install # --with-all-dependencies
