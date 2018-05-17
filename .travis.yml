@@ -11,9 +11,9 @@ cache:
 
 php: # symfony/skeleton requires ^7.0.8
 - nightly
-- 7.0 # SYMFONY_VERSION="^3.4" only one version of skeleton working with php 7.0
-- 7.1
 - 7.2
+- 7.1
+- 7.0 # SYMFONY_VERSION="^3.4" only one version of skeleton working with php 7.0
 
 matrix:
   fast_finish: true
@@ -54,14 +54,12 @@ install:
 # - composer --working-dir=.. install # Needs to be after to allow the previous script to show downloads of new versions.
 
 
-before_script:
-- curl_security_check composer.lock
-- curl_security_check ../composer.lock
-#^ This checks that the application doesn't use dependencies with known security vulnerabilities
-- false
-
-
 script:
+- curl_security_check composer.lock
+# - curl_security_check ../composer.lock
+#^ This checks that the application doesn't use dependencies with known security vulnerabilities
+
+
 - bin/console server:start
 # - make serve # would need a Makefile !
 - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever,interval=0.001 # Waiting for server to connect.
