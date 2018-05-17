@@ -55,15 +55,15 @@ install:
 
 
 script:
-- curl_security_check composer.lock
-# - curl_security_check ../composer.lock
-#^ This checks that the application doesn't use dependencies with known security vulnerabilities
-
-
 - bin/console server:start
 # - make serve # would need a Makefile !
 - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever,interval=0.001 # Waiting for server to connect.
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
+
+
+- curl_security_check composer.lock
+# - curl_security_check ../composer.lock
+#^ This checks that the application doesn't use dependencies with known security vulnerabilities
 
 
 after_script:
@@ -73,7 +73,7 @@ after_script:
 - ls -R --color bin config public src
 # - ls -R --color var
 - $GOPATH/bin/ccat composer.json
-- $GOPATH/bin/ccat config/bundles.php
+- php -s config/bundles.php | elinks -force-html -dump-color-mode 4 -dump
 - $GOPATH/bin/ccat config/routes.yaml
 - $GOPATH/bin/ccat config/services.yaml
 - $GOPATH/bin/ccat config/packages/framework.yaml
