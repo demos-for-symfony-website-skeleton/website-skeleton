@@ -56,8 +56,9 @@ install:
 
 script:
 - bin/console server:start
-# - make serve # would need a Makefile !
-- printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever,interval=0.1 # Waiting for server to connect.
+# - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever,interval=0.1 # Waiting for server to connect.
+# - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever >/dev/null # Waiting for server to connect.
+- printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever # Waiting for server to connect.
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
 
 
