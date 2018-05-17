@@ -55,8 +55,8 @@ install:
 
 
 script:
-# - bin/console server:start
-- composer exec --verbose -- console server:start
+# - composer exec --verbose -- console server:start # console server:start blocks endlessly with composer exec
+- bin/console server:start
 - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever >/dev/null # Waiting for server to connect.
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
 
