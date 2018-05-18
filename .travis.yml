@@ -76,6 +76,8 @@ after_script:
 - ls -R --color bin config public src
 # - ls -R --color var
 - $GOPATH/bin/ccat composer.json
+- $GOPATH/bin/ccat ../composer.json
+- colordiff --minimal --side-by-side composer.json ../composer.json
 - php -s config/bundles.php | elinks -force-html -dump-color-mode 4 -dump
 - $GOPATH/bin/ccat config/routes.yaml
 - $GOPATH/bin/ccat config/services.yaml
