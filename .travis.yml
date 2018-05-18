@@ -28,7 +28,6 @@ matrix:
 
 before_install:
 - go get -u github.com/jingweno/ccat
-# - if [[ -f config/parameters.yml.travis ]]; then cp config/parameters.yml.travis config/parameters.yml; fi
 # - pip install pygments # but now pygmentize is no more used right here.
 - wget --output-document=- https://github.com/travis-util/https-security-checker/archive/master.zip  | jar xvf /dev/stdin
 - . https-security-checker-master/curl_security_check.sh
@@ -55,8 +54,7 @@ install:
 
 
 script:
-# - composer exec --verbose -- console server:start # console server:start blocks endlessly with composer exec
-- bin/console server:start
+- bin/console server:start # - composer exec ... blocks endlessly
 - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8000,forever >/dev/null # Waiting for server to connect.
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
 
@@ -82,3 +80,6 @@ after_script:
 - $GOPATH/bin/ccat config/packages/test/framework.yaml
 - $GOPATH/bin/ccat src/Kernel.php
 - php -s src/Kernel.php | elinks -force-html -dump-color-mode 4 -dump
+
+
+# - if [[ -f config/parameters.yml.travis ]]; then cp config/parameters.yml.travis config/parameters.yml; fi
