@@ -50,7 +50,7 @@ install:
   cd website-skeleton
   composer config bin-dir bin
   composer install
-# - composer --working-dir=.. install # Needs to be after to allow the previous script to show downloads of new versions.
+- composer --working-dir=.. install # Needs to be after to allow the previous script to show downloads of new versions.
 
 
 script:
@@ -59,8 +59,13 @@ script:
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
 
 
+- ../bin/console server:start # - composer exec ... blocks endlessly
+- printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8001,forever >/dev/null # Waiting for server to connect.
+- elinks http://localhost:8001/ -dump-color-mode 4 -dump
+
+
 - curl_security_check composer.lock
-# - curl_security_check ../composer.lock
+- curl_security_check ../composer.lock
 #^ This checks that the application doesn't use dependencies with known security vulnerabilities
 
 
