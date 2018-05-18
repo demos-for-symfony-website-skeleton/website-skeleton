@@ -59,7 +59,7 @@ script:
 - elinks http://localhost:8000/ -dump-color-mode 4 -dump
 
 
-- ../bin/console server:start # - composer exec ... blocks endlessly
+- (cd .. ; bin/console server:start ) # - composer exec ... blocks endlessly
 - printf 'HEAD / HTTP/1.1\r\n\r\n' | socat - TCP4:localhost:8001,forever >/dev/null # Waiting for server to connect.
 - elinks http://localhost:8001/ -dump-color-mode 4 -dump
 
