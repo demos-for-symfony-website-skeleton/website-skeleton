@@ -31,7 +31,7 @@ before_install:
 - go get -u github.com/jingweno/ccat
 # - pip install pygments # but now pygmentize is no more used right here.
 - wget --output-document=- https://github.com/travis-util/https-security-checker/archive/master.zip  | jar xvf /dev/stdin
-- . https-security-checker-master/curl_security_check.sh
+- . https-security-checker-master/init-source.bash
 # Disabling Xdebug - Debugger and Profiler Tool for PHP
 - |
   php -r "print_r(get_loaded_extensions(TRUE));"
