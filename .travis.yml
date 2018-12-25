@@ -12,6 +12,7 @@ cache:
 
 php: # symfony/skeleton requires ^7.0.8
 - nightly
+- 7.3
 - 7.2
 - 7.1
 - 7.0 # SYMFONY_VERSION="^3.4" only one version of skeleton working with php 7.0
@@ -19,11 +20,11 @@ php: # symfony/skeleton requires ^7.0.8
 matrix:
   fast_finish: true
   include:
-  - php: 7.2
+  - php: 7.3
     env: SKELETON_VERSION="dev-master@dev"
   allow_failures:
-  - php: 7.3
   - php: nightly
+  - php: 7.4
   - env: SKELETON_VERSION="dev-master@dev"
 
 
