@@ -11,7 +11,7 @@ cache:
     - $HOME/.composer/cache/files
 
 php: # symfony/skeleton requires ^7.0.8
-- nightly
+# - nightly # see matrix
 - 7.3
 - 7.2
 - 7.1
@@ -25,6 +25,11 @@ matrix:
   include:
   - php: 7.3
     env: SKELETON_VERSION="dev-master@dev"
+  - php: nightly
+    addons:
+      apt:
+        packages:
+        - libonig2
   allow_failures:
   - php: nightly
   - php: 7.4
