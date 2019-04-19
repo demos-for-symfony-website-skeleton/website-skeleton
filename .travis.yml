@@ -17,6 +17,9 @@ php: # symfony/skeleton requires ^7.0.8
 - 7.1
 - 7.0 # SYMFONY_VERSION="^3.4" only one version of skeleton working with php 7.0
 
+env:
+- COMPOSER_MEMORY_LIMIT=-1
+
 matrix:
   fast_finish: true
   include:
